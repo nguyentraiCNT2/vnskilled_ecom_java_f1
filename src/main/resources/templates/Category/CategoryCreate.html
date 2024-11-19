@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Category - Server Size</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+          integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link href="http://localhost:8080/api/v1/static/css/style.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <div th:insert="~{Layout/SileBar :: SileBar}"></div>
+    <main class="main">
+        <div class="recent-orders">
+            <h2>Create Category</h2>
+            <div class="container-fluid">
+                <form th:action="@{/admin/categories/create}" method="post" enctype="multipart/form-data" class="form">
+                    <div class="row input-group">
+                        <label for="name" class="input-label">Category Name:</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter category name" required>
+                    </div>
+
+                    <div class="row input-group">
+                        <label for="description" class="input-label">Description:</label>
+                        <textarea class="form-control" id="description" name="description" placeholder="Enter description" required></textarea>
+                    </div>
+
+                    <div class="row input-group">
+                        <label for="file" class="input-label">Image:</label>
+                        <input type="file" class="form-control" id="file" name="file" accept="image/*">
+                    </div>
+
+                    <div class="row input-group">
+                        <label for="parentId" class="input-label">Parent Category:</label>
+                        <select class="form-control" id="parentId" name="parentId">
+                            <option value="">Chọn danh mục cha</option>
+                            <option th:each="category : ${categories}" th:value="${category.categoriesDTO.id}" th:text="${category.categoriesDescriptionsDTOList.get(0).name}"></option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Create Category</button>
+                </form>
+            </div>
+
+
+            <!-- Hiển thị thông báo lỗi nếu có -->
+            <div th:if="${message}" class="alert alert-danger" th:text="${message}"></div>
+        </div>
+    </main>
+    <div th:insert="~{Layout/rightsection :: rightsection}"></div>
+</div>
+<script src="http://localhost:8080/api/v1/static/js/index.js"></script>
+</body>
+</html>

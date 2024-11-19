@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>User List - Server Size</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+          integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <!-- Template Stylesheet -->
+    <link href="http://localhost:8080/api/v1/static/css/style.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <!-- Sidebar -->
+    <div th:insert="~{Layout/SileBar :: SileBar}"></div>
+    <!-- Main Content Start -->
+    <main  class="main">
+        <div class="recent-orders">
+            <h2>User List</h2>
+
+            <!-- Filter Form Start -->
+            <div class="container-fluid">
+                <div class="bg-light rounded h-100 p-4 mb-4">
+                    <form method="get" action="/api/v1/admin/user/list">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <input type="text" class="form-control-list" name="email" placeholder="Email">
+                            </div>
+                            <div class="col-md-3">
+                                <select class="form-control-list" name="roleId">
+                                    <option value="">Select Role</option>
+                                    <option value="1" th:selected="${param.roleId == 1}">ADMIN</option>
+                                    <option value="2" th:selected="${param.roleId == 2}">USER</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <select class="form-control-list" name="active">
+                                    <option value="">Select Active Status</option>
+                                    <option value="true" th:selected="${param.active == 'true'}">Active</option>
+                                    <option value="false" th:selected="${param.active == 'false'}">Inactive</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <select class="form-control-list" name="emailActive">
+                                    <option value="">Select Email Verified Status</option>
+                                    <option value="true" th:selected="${param.emailActive == 'true'}">Verified</option>
+                                    <option value="false" th:selected="${param.emailActive == 'false'}">Unverified</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="col-md-12 text-end">
+                                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-filter"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+            <!-- Filter Form End -->
+        </div>
+        <!-- User List Table -->
+        <div class="recent-orders">
+            <table class="table">
+                <thead  class="thead">
+                <tr class="tr">
+                    <th class="th">#</th>
+                    <th class="th" >Email</th>
+                    <th class="th">Full Name</th>
+                    <th class="th">Active</th>
+                    <th class="th">Email Verified</th>
+                    <th class="th">Created At</th>
+                    <th class="th"></th>
+                    <th class="th">Actions</th>
+                    <th class="th"></th>
+                </tr>
+                </thead>
+                <tbody class="tbody">
+                <tr th:each="user, iterStat : ${users}">
+                    <th class="th" th:text="${iterStat.count}">1</th>
+                    <td class="td" th:text="${user.email}">john@email.com</td>
+                    <td class="td" th:text="${user.firstName} + ' ' + ${user.lastName}">John Doe</td>
+                    <td class="td" th:text="${user.active ? 'Active' : 'Inactive'}">Active</td>
+                    <td class="td" th:text="${user.emailActive ? 'Verified' : 'Unverified'}">Verified</td>
+                    <td class="td" th:text="${#dates.format(user.createdAt, 'yyyy-MM-dd HH:mm')}">2024-10-26</td>
+                    <td class="td">
+                        <a th:href="@{/admin/update-role/{id}(id=${user.id})}" >Update Role</a>
+                    </td>
+                    <td class="td">
+                        <div th:if="${user.active}">
+                            <form th:action="@{/admin/ban/{id}(id=${user.id})}" method="post" style="display:inline;">
+                                <button type="submit"><i class="fa-solid fa-lock"></i></button>
+                            </form>
+                        </div>
+                        <div th:if="${!user.active}">
+                            <form th:action="@{/admin/active/{id}(id=${user.id})}" method="post" style="display:inline;">
+                                <button type="submit"><i class="fa-solid fa-lock-open"></i></button>
+                            </form>
+                        </div>
+                    </td>
+
+                    <td class="td">
+                    <a th:href="@{/admin/user/detail/{id}(id=${user.id})}">Details</a>
+                </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- End of User List Table -->
+    </main>
+    <div th:insert="~{Layout/rightsection :: rightsection}"></div>
+</div>
+
+
+<!-- Template Javascript -->
+<script src="http://localhost:8080/api/v1/static/js/index.js">
+
+
+</script>
+</body>
+</html>

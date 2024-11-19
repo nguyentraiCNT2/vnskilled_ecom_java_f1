@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <title>Category List - Server Size</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <!-- Template Stylesheet -->
+  <link href="http://localhost:8080/api/v1/static/css/style.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+  <!-- Sidebar -->
+  <div th:insert="~{Layout/SileBar :: SileBar}"></div>
+  <!-- Main Content Start -->
+  <main class="main">
+    <div class="recent-orders">
+      <h2>Category List</h2>
+
+      <!-- Filter Form Start -->
+      <div class="container-fluid">
+        <div class="bg-light rounded h-100 p-4 mb-4">
+          <form method="get" action="/api/v1/admin/categories/search">
+            <div class="row">
+              <div class="col-md-3">
+                <input type="text" class="form-control-list" name="name" placeholder="Category Name"/>
+              </div>
+              <div class="col-md-3">
+                <div class="col-md-12 text-end">
+                  <button type="submit" class="btn btn-primary"><i class="fa-solid fa-filter"></i></button>
+                </div>
+
+              </div>
+                <div class="col-md-3">
+                  <div class="col-md-12 text-end">
+                    <a th:href="@{/admin/categories/create}" class="btn btn-primary"><i class="fa-solid fa-plus"></i></a>
+                  </div>
+                </div>
+
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- Filter Form End -->
+    </div>
+
+    <!-- Category List Table -->
+    <div class="recent-orders">
+
+      <table class="table">
+
+        <thead class="thead">
+        <tr class="tr">
+          <th class="th">#</th>
+          <th class="th">Name</th>
+          <th class="th">Language</th>
+          <th class="th">Parent id</th>
+          <th class="th">Created at</th>
+          <th class="th">Description List</th>
+          <th class="th">Action</th>
+        </tr>
+        </thead>
+        <tbody class="tbody">
+        <tr th:each="category, iterStat : ${categories}">
+          <th class="th" th:text="${iterStat.count}">1</th>
+          <td class="td" th:text="${category.getCategoriesDescriptionsDTOList().get(0).name}">Category Name</td>
+          <td class="td" th:text="${category.getCategoriesDescriptionsDTOList().get(0).language}">Category Name</td>
+          <td class="td" th:text="${category.categoriesDTO.parentId}">Category Name</td>
+          <td class="td" th:text="${#dates.format(category.categoriesDTO.createdAt, 'yyyy-MM-dd HH:mm')}">2024-10-26</td>
+          <td class="td">
+            <a th:href="@{/admin/categories/desription/{id}(id=${category.categoriesDTO.id})}"> <i class="fa-solid fa-list"></i></a>
+          </td>
+          <td class="td">
+            <a th:href="@{/admin/categories/edit/{id}(id=${category.categoriesDTO.id})}">Edit</a>
+            <form th:action="@{/admin/categories/delete/{id}(id=${category.categoriesDTO.id})}" method="post" style="display:inline;">
+              <input type="hidden" name="_method"  value="delete">
+              <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- End of Category List Table -->
+
+    <!-- Pagination -->
+    <div class="pagination">
+      <span th:if="${currentPage > 1}">
+        <a th:href="@{/admin/categories(page=${currentPage - 1}, limit=${limit})}">Previous</a>
+      </span>
+
+      <span th:text="${currentPage} + ' / ' + ${totalPages}"></span>
+
+      <span th:if="${currentPage < totalPages}">
+        <a th:href="@{/admin/categories(page=${currentPage + 1}, limit=${limit})}">Next</a>
+      </span>
+    </div>
+  </main>
+
+  <div th:insert="~{Layout/rightsection :: rightsection}"></div>
+</div>
+
+<!-- Template Javascript -->
+<script src="http://localhost:8080/api/v1/static/js/index.js"></script>
+</body>
+</html>

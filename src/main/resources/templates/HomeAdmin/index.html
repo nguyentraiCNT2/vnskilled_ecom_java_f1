@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>DASHMIN - Bootstrap Admin Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+          integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <!-- Template Stylesheet -->
+    <link href="http://localhost:8080/api/v1/static/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <div th:insert="~{Layout/SileBar :: SileBar}"></div>
+        <!-- Main content -->
+        <main class="main">
+            <h1>Analytics</h1>
+            <!-- Analyses -->
+            <div class="alanyse">
+                <div class="sales">
+                    <div class="status">
+                        <div class="info">
+                            <h3>Total sales</h3>
+                            <h1>$65.024</h1>
+                        </div>
+                        <div class="progresss">
+                            <svg>
+                                <circle cx="38" cy="38" r="36"></circle>
+                            </svg>
+                            <div class="percentage">
+                                <p>+81%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="visits">
+                    <div class="status">
+                        <div class="info">
+                            <h3>Site Vistit</h3>
+                            <h1>24.981</h1>
+                        </div>
+                        <div class="progresss">
+                            <svg>
+                                <circle cx="38" cy="38" r="36"></circle>
+                            </svg>
+                            <div class="percentage">
+                                <p>-41%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="searches">
+                    <div class="status">
+                        <div class="info">
+                            <h3>Searches</h3>
+                            <h1>14.147</h1>
+                        </div>
+                        <div class="progresss">
+                            <svg>
+                                <circle cx="38" cy="38" r="36"></circle>
+                            </svg>
+                            <div class="percentage">
+                                <p>+21%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--End of Analyses -->
+
+            <!-- New Users -->
+            <div class="new-users">
+                <h2>New Users</h2>
+                <div class="user-list">
+                    <div class="user">
+                        <img src="./images/profile-2.jpg" alt="">
+                        <h2>Kin</h2>
+                        <p>54 Min Ago</p>
+                    </div>
+                    <div class="user">
+                        <img src="./images/profile-3.jpg" alt="">
+                        <h2>Amir</h2>
+                        <p>3 Min Ago</p>
+                    </div>
+                    <div class="user">
+                        <img src="./images/profile-4.jpg" alt="">
+                        <h2>Ember</h2>
+                        <p>5 Min Ago</p>
+                    </div>
+                    <div class="user">
+                        <img src="./images/plus.png" alt="">
+                        <h2>More</h2>
+                        <p>New User</p>
+                    </div>
+                </div>
+            </div>
+            <!-- End of New users -->
+
+            <!-- Recent Orders Table -->
+            <div class="recent-orders">
+                <h2>Recent Orders</h2>
+                <table class="table">
+                    <thead class="thead">
+                    <tr class="tr">
+                        <th class="th">Course Name</th>
+                        <th class="th">Course Number</th>
+                        <th class="th">Payment</th>
+                        <th class="th">Statu</th>
+                        <th class="th"></th>
+                    </tr>
+                    </thead>
+                    <tbody class="tbody"></tbody>
+                </table>
+                <a href="" class="link">Show All</a>
+            </div>
+            <!-- End of Recent Orders Table -->
+        </main>
+        <!-- End of main content -->
+    <div th:insert="~{Layout/rightsection :: rightsection}"></div>
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+</div>
+
+<!-- Template Javascript -->
+<script>
+    const sideMenu = document.querySelector('.aside');
+    const menuBtn = document.getElementById('menu-btn');
+    const closeBtn = document.getElementById('close-btn');
+    const darkMode = document.querySelector('.dark-mode');
+
+    menuBtn.addEventListener('click', () => {
+        sideMenu.style.display = 'block';
+    });
+
+    closeBtn.addEventListener('click', () => {
+        sideMenu.style.display = 'none';
+    });
+
+    darkMode.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode-variables');
+
+        darkMode.querySelector('i:nth-child(1)').classList.toggle('active');
+        darkMode.querySelector('i:nth-child(2)').classList.toggle('active');
+    });
+
+
+</script>
+</body>
+</html>

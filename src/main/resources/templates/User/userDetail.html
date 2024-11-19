@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>User Detail - Server Size</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+          integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+    <!-- Template Stylesheet -->
+    <link href="http://localhost:8080/api/v1/static/css/style.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <!-- Sidebar -->
+    <div th:insert="~{Layout/SileBar :: SileBar}"></div>
+    <!-- Main Content Start -->
+    <main class="main">
+
+        <div class="recent-orders">
+            <div class="user-detail">
+
+
+                <h2>User Detail</h2>
+                <div class="bg-light rounded p-4 mb-4">
+                        <div class="col-md-6">
+                            <h4>Email:</h4>
+                            <p th:text="${user.email}">john@email.com</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Full Name:</h4>
+                            <p th:text="${user.firstName} + ' ' + ${user.lastName}">John Doe</p>
+                        </div>
+                    <div class="col-md-6">
+                        <h4>Phone:</h4>
+                        <p th:text="${user.phone}">0817912235</p>
+                    </div>
+                        <div class="col-md-6">
+                            <h4>Active:</h4>
+                            <p th:text="${user.active ? 'Active' : 'Inactive'}">Active</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Email Verified:</h4>
+                            <p th:text="${user.emailActive ? 'Verified' : 'Unverified'}">Verified</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Created At:</h4>
+                            <p th:text="${#dates.format(user.createdAt, 'yyyy-MM-dd HH:mm')}">2024-10-26</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Last Updated:</h4>
+                            <p th:text="${#dates.format(user.updatedAt, 'yyyy-MM-dd HH:mm')}">2024-10-26</p>
+                        </div>
+                    <div class="col-md-6">
+                        <h4>Role:</h4>
+                        <p th:text="${user.roleId.name}">User</p>
+                    </div>
+                    </div>
+                <h4>Actions</h4>
+                <div class="action-buttons">
+                    <a href="/api/v1/admin/user/list" class="btn btn-secondary">Back to User List</a>
+                </div>
+            </div>
+        </div>
+
+    </main>
+    <div th:insert="~{Layout/rightsection :: rightsection}"></div>
+</div>
+
+<!-- Template Javascript -->
+<script src="http://localhost:8080/api/v1/static/js/index.js"></script>
+</body>
+</html>

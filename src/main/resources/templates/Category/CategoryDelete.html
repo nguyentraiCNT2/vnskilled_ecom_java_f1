@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <title>Category Delete Error - Server Size</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <!-- Template Stylesheet -->
+  <link href="http://localhost:8080/api/v1/static/css/style.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+  <!-- Sidebar -->
+  <div th:insert="~{Layout/SileBar :: SileBar}"></div>
+  <!-- Main Content Start -->
+  <main class="main">
+    <div class="recent-orders">
+      <h2>Error Deleting Category</h2>
+
+      <div class="bg-light rounded h-100 p-4 mb-4">
+        <!-- Display error message -->
+        <div th:if="${errorMessage}" class="alert alert-danger" th:text="${errorMessage}"></div>
+        <div class="text-center">
+          <a th:href="@{/admin/categories}" class="btn btn-primary">Go Back to Category List</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div th:insert="~{Layout/rightsection :: rightsection}"></div>
+</div>
+
+<!-- Template Javascript -->
+<script src="http://localhost:8080/api/v1/static/js/index.js"></script>
+</body>
+</html>

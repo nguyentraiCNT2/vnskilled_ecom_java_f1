@@ -1,0 +1,36 @@
+# Application properties
+spring.application.name=
+server.port=
+server.address=0.0.0.0
+# Datasource properties
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.datasource.url=
+spring.datasource.username=
+spring.datasource.password=
+# Gmail properties
+spring.mail.host=
+spring.mail.port=
+spring.mail.username=
+spring.mail.password=
+spring.mail.properties.mail.smtp.auth=true
+spring.mail.properties.mail.smtp.starttls.enable=true
+# AES properties
+aes.key=
+aes.iv=
+# Security
+logging.level.org.springframework.security=INFO
+#RabbitMQ
+spring.rabbitmq.host=localhost
+spring.rabbitmq.port=5672
+spring.rabbitmq.username=
+spring.rabbitmq.password=
+spring.rabbitmq.virtual-host=/
+#Redis
+spring.data.redis.host=
+spring.data.redis.port=
+spring.data.redis.password=
+spring.cache.type=redis
+#Aws
+aws.s3.bucket-name=
+aws.s3.access-key=
+aws.s3.secret-key=

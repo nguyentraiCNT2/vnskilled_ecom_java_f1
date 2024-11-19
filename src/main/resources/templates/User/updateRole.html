@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <title>Update User Role - Server Size</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <!-- Template Stylesheet -->
+  <link href="http://localhost:8080/api/v1/static/css/style.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+  <!-- Sidebar -->
+  <div th:insert="~{Layout/SileBar :: SileBar}"></div>
+  <!-- Main Content Start -->
+  <main class="main">
+    <div class="recent-orders">
+      <h2>Update User Role</h2>
+
+      <!-- Update Role Form Start -->
+      <div class="container-fluid">
+          <form method="post" action="/api/v1/admin/update-role" class="form">
+            <input type="hidden" name="userId" th:value="${user.id != null ? user.id : ''}" />
+              <div class="row input-group">
+                <label for="email" class="input-label">Email:</label>
+                <input type="text" id="email" class="form-control" th:value="${user.email}" readonly/>
+              </div>
+              <div class="row input-group">
+                <label for="currentRole" class="input-label">Current Role:</label>
+                <input type="text" id="currentRole" class="form-control" th:value="${user.roleId.name}" readonly/>
+              </div>
+              <div class="row input-group">
+                <label for="roleId" class="input-label">New Role:</label>
+                <select id="roleId" class="form-control" name="roleId">
+                  <option value="1" th:selected="${user.roleId.name == 'ADMIN'}" >ADMIN</option>
+                  <option value="2" th:selected="${user.roleId.name == 'USER'}">USER</option>
+                </select>
+              </div>
+            <div class="row mt-3">
+              <div class="col-md-12 text-end">
+                <button type="submit" class="btn btn-primary">Update Role</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- Update Role Form End -->
+  </main>
+  <div th:insert="~{Layout/rightsection :: rightsection}"></div>
+</div>
+
+<!-- Template Javascript -->
+<script src="http://localhost:8080/api/v1/static/js/index.js"></script>
+</body>
+</html>

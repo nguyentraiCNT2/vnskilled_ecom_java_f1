@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>DASHMIN - Bootstrap Admin Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+          integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <!-- Template Stylesheet -->
+    <link href="http://localhost:8080/api/v1/static/css/style.css" rel="stylesheet">
+</head>
+<body>
+<div th:fragment="SileBar">
+    <aside>
+        <div class="toggle">
+            <div class="logo">
+                <h2>Book <span class="danger">Case</span></h2>
+            </div>
+
+            <div class="close" id="close-btn">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+        </div>
+
+        <div class="sidebar">
+            <a class="link" href="/api/v1/admin/home">
+                <i class="fa-solid fa-chess-board"></i>
+                <h3>Dashboard</h3>
+            </a>
+            <a class="link" href="/api/v1/admin/user/list">
+                <i class="fa-regular fa-user"></i>
+                <h3>User</h3>
+            </a>
+            <a class="link" href="/api/v1/admin/categories">
+                <i class="fa-solid fa-clock-rotate-left"></i>
+                <h3>Categories</h3>
+            </a>
+            <a class="link" href="#">
+                <i class="fa-solid fa-chart-simple"></i>
+                <h3>Analytics</h3>
+            </a>
+            <a class="link" href="#">
+                <i class="fa-regular fa-envelope"></i>
+                <h3>Tickets</h3>
+                <span class="message-count">27</span>
+            </a>
+            <a class="link" href="#">
+                <i class="fa-solid fa-list-check"></i>
+                <h3>Sale List</h3>
+            </a>
+            <a class="link" href="#">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <h3>Report</h3>
+            </a>
+            <a class="link" href="#">
+                <i class="fa-solid fa-gear"></i>
+                <h3>Setting</h3>
+            </a>
+            <a class="link" href="#">
+                <i class="fa-solid fa-plus"></i>
+                <h3>New</h3>
+            </a>
+            <a class="link" href="#">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <h3>Logout</h3>
+            </a>
+        </div>
+    </aside>
+    <!-- End of sidebar -->
+
+    <!-- Template Javascript -->
+    <script src="http://localhost:8080/api/v1/static/js/index.js"></script>
+    <script src="http://localhost:8080/api/v1/static/js/orders.js"></script>
+
+    <script>
+        // JavaScript để xác định đường dẫn hiện tại và đánh dấu liên kết "active"
+        const currentLocation = window.location.pathname;
+        const links = document.querySelectorAll('.sidebar a.link');
+
+        links.forEach(link => {
+            if (link.getAttribute('href') === currentLocation) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+    </script>
+</div>
+</body>
+</html>
